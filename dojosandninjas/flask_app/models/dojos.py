@@ -31,10 +31,11 @@ class Dojos:
         results = connectToMySQL('dojos_and_ninjas').query_db(query, data)
 
         print(results)
-        users = []
-        for result in results:
-            users.append(cls(result))
-        return users
+        # users = []
+        # for result in results:
+        #     users.append(cls(result))
+        one_dojo = cls(results[0])
+        return one_dojo
 
     @classmethod
     def delete(cls, data):

@@ -10,7 +10,7 @@
 </head>
 <body>
     <form method = "post" action="/newninja">
-        <select class="form-select" aria-label="Default select example" name="dojos_id">
+        <select class="form-select" name="dojos_id">
             <option selected disabled>Pick which Dojo you want.</option>
             {% for dojo in all_dojos %}
                 <option value="{{dojo.id}}">{{dojo.name}}</option>

@@ -43,5 +43,4 @@ class Users:
     @classmethod
     def edit(cls, data):
         query = "UPDATE users SET first_name = %(first_name)s, last_name = %(last_name)s, email = %(email)s WHERE id=%(id)s"
-        edit_user = connectToMySQL('users').query_db(query, data)
-        return edit_user
+        return connectToMySQL('users').query_db(query, data)
