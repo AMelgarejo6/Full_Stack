@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lexoletics Shopping</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+</head>
+
+<body>
+    <nav style="padding-left:40px" class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">Lexoletics</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/shop">Browse</a>
+                </li>
+                {% if "logged_id" in session %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/mycart/{{session["logged_id"]}}">Cart</a>
+                </li>
+                {% endif %}
+                {% if "logged_id" not in session %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/register">Login/Reg</a>
+                </li>
+                {% endif %}
+                {% if "logged_id" in session %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    <h2 style="margin-left:40px">Clothing</h2>
+    <div class="d-flex justify-content-center">
+        <img style="height:600px" src="static/IMG-4181.jpeg" alt="lexoletics">
+        <img style="height:600px; width: 400px" src="static/IMG-4166.JPG" alt="lexoletics">
+        <img style="height:600px; width: 450px;" src="static/IMG-4185.jpeg" alt="lexoletics">
+    </div>
+    <div class="p-3 m-2 d-flex flex-row w-75 h-85 flex-wrap mx-auto">
+        {% for product in all_products %}
+        <div class="d-flex flex-column align-items-center mx-auto justify-content-around"
+            style="height:400px; width:250px; border:2px solid black; margin-top:4px;">
+            <a href="/singleproduct/{{product.id}}"><img src="{{product.image}}"></a>
+            <a href="/singleproduct/{{product.id}}">
+                <h2>{{product.category}}</h2>
+            </a>
+            <p>${{product.price}}</p>
+        </div>
+        {% endfor %}
+    </div>
+    
+</body>
+
+</html>

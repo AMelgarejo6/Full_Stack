@@ -1,0 +1,46 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+@import url('https://fonts.googleapis.com/css?family=Red+Hat+Display:900&display=swap');
+
+html {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+  background: #EEEEF5;
+}
+
+
+.lexoletics {
+  font-size: 13vw;
+  line-height: 8vw;
+  margin: 0;
+  font-family: 'Red Hat Display', sans-serif;
+  font-weight: 900;
+  background: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIAKxEl7zMZsCpUNgr2oCAh0sjBm46tRI7PQ&usqp=CAU);
+  background-size: 40%;
+  background-position: 50% 50%;
+  -webkit-background-clip: text;
+  color: rgba(0,0,0,0.08);
+  animation: zoomout 10s ease 350ms forwards;
+}
+
+@keyframes zoomout {
+  from {
+    background-size: 40%;
+  }
+  to {
+    background-size: 10%;
+  }
+}

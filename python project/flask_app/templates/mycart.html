@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cart</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{url_for('static', filename='singleproduct.css')}}">
+</head>
+
+<body>
+    <nav style="padding-left:40px" class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">Lexoletics</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/shop">Browse</a>
+                </li>
+                {% if "logged_id" not in session %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/register">Login/Reg</a>
+                </li>
+                {% endif %}
+                {% if "logged_id" in session %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    <div style="background-color:white; width: 200px; margin-left: 15px; margin-top: 15px">
+        <h1 style="color:black;">Your Cart</h1>
+    </div>
+    <div class="mx-auto d-flex justify-content-evenly align-items-center flex-row"
+        style="margin-top: 20px; width:600px;">
+        {% for item in all_items %}
+        <div style="border: 2px solid black; background-color: white;">
+            <img src="{{item.image}}" alt="Image">
+            <h3>{{item.category}} {{item.price}}</h3>
+        </div>
+        {% endfor %}
+        <br>
+    </div>
+    <div style="margin-top:15px" class="d-flex justify-content-center">
+        <a class="btn btn-primary" style="width:100px"
+            href="https://buy.stripe.com/test_6oEg037d8gdbbNmeUV">CheckOut</a>
+    </div>
+</body>
+
+</html>

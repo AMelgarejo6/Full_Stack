@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{single_product.category}}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{url_for('static', filename='singleproduct.css')}}">
+</head>
+
+<body>
+    <nav style="padding-left:40px" class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">Lexoletics</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/shop">Browse</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Cart</a>
+                </li>
+                {% if "logged_id" not in session %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/register">Login/Reg</a>
+                </li>
+                {% endif %}
+                {% if "logged_id" in session %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    <div style="width: 1000px" class="d-flex">
+        <div class="d-flex flex-column mx-auto align-items-center justify-content-evenly"
+            style="background-color: white; border-radius: 25%; height:500px; width: 50%;">
+            <img style="height:275px; width:275px; border: 2px solid black" src="{{single_product.image}}"
+                alt="Clothing Picture">
+            <h3>{{single_product.category}}
+                ${{single_product.price}}</h3>
+            {{single_product.description}}
+            {% if "logged_id" in session %}
+            <a href="/addcart/{{single_product.id}}" class="btn btn-light" style="border:2px solid black">Add to
+                Cart</a>
+            {% endif %}
+        </div>
+        <div class="d-flex flex-column">
+            {% for review in single_product.reviews %}
+            <div class="p-2" style="border: 1px solid black; background-color: white; margin-top: 15px; border-radius: 5%;">
+                <h4>{{review.user.first_name}} {{review.user.last_name}} said</h4>
+                {{review.content}}
+                <br>
+                Rating: {{review.rating}}
+                <br>
+                {% if session["logged_id"] == review.users_id %}
+                <a class="btn btn-dark" href="/delete/review/{{review.id}}/{{single_product.id}}">Delete Review</a>
+                {% endif %}
+            </div>
+            {% endfor %}
+            {% if "logged_id" in session %}
+            <a class="btn btn-light" href="/add/review/{{single_product.id}}">Write a review!</a>
+            {% endif %}
+        </div>
+    </div>
+</body>
+
+</html>
